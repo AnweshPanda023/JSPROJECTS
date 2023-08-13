@@ -8,19 +8,19 @@ const questions = [
     correct: "a",
   },
   {
-    que: "which of the following is a markup language",
+    que: "which of the following is a object oriented programming language",
     a: "JAVA",
     b: "HTML",
-    c: "JavaScript",
+    c: "CSS",
     d: "PHP",
     correct: "b",
   },
   {
-    que: "which of the following is a markup language",
+    que: "which of the following is a functional language",
     a: "CSS",
     b: "HTML",
     c: "JavaScript",
-    d: "PHP",
+    d: "None of these",
     correct: "b",
   },
 ];
@@ -30,8 +30,8 @@ let total = questions.length;
 let right = 0;
 let wrong = 0;
 
-let quesBox = document.getElementById("queBox");
-let optionInputs = document.querySelectorAll(".option");
+const quesBox = document.getElementById("queBox");
+const optionInputs = document.querySelectorAll(".option");
 
 const loadQuestion = () => {
   const data = questions[index];
@@ -50,7 +50,6 @@ const loadQuestion = () => {
 const submitQuiz = () => {
   const ans = getAnswer();
   const data = questions[index];
-
   if (ans === data.correct) {
     right++;
   } else {
