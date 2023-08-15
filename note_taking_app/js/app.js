@@ -7,7 +7,11 @@ const saveNotes = () => {
   notes.forEach((note) => {
     data.push(note.value);
   });
-  localStorage.setItem("notes", JSON.stringify(data));
+  if (data.length === 0) {
+    localStorage.removeItem("notes");
+  } else {
+    localStorage.setItem("notes", JSON.stringify(data));
+  }
   //   console.log(data);
 };
 {
@@ -23,7 +27,8 @@ const saveNotes = () => {
 addbtn.addEventListener("click", () => {
   addNote();
 });
-const addNote = () => {
+
+const addNote = (text = "") => {
   const note = document.createElement("div");
   note.classList.add("note");
   note.innerHTML = `
@@ -31,14 +36,29 @@ const addNote = () => {
           <i class="save fa-solid fa-floppy-disk fa-2x __save"></i>
           <i class="trash fa-solid  fa-trash fa-2x"></i>
         </div>
-        <textarea></textarea>
+        <textarea>${text}</textarea>
       `;
-  note.querySelector(".trash").addEventListener("click", () => {
-    note.remove();
-  });
 
   note.querySelector(".save").addEventListener("click", () => {
     saveNotes();
   });
+  note.querySelector(".trash").addEventListener("click", () => {
+    note.remove();
+    saveNotes();
+  });
+  note.querySelector("textarea").addEventListener("focusout", function () {
+    saveNotes();
+  });
   main.appendChild(note);
+  saveNotes();
 };
+(function () {
+  const lsNotes = JSON.parse(localStorage.getItem("notes"));
+  if (lsNotes === null) {
+    addNote();
+  } else {
+    lsNotes.forEach((lsNote) => {
+      addNote(lsNote);
+    });
+  }
+})();
