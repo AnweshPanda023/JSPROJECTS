@@ -1,0 +1,20 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#container {
+  padding-top: 300px;
+  font-size: 50px;
+}
+#btn {
+  padding: 20px;
+  background-color: aqua;
+  border: none;
+}
+#btn:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
